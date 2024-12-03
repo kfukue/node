@@ -1,0 +1,9 @@
+docker compose up --build
+curl -d '{"id":0,"jsonrpc":"2.0","method":"eth_getBlockByNumber","params":["latest",false]}' \
+  -H "Content-Type: application/json" http://localhost:8540
+
+
+  docker ps -a -f status=exited 
+And to delete all exited containers use this command: 
+
+docker rm $(docker ps -a -f status=exited -q) 

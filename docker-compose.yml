@@ -4,8 +4,8 @@ services:
   geth: # this is Optimism's geth client
     build: .
     ports:
-      - 8545:8545       # RPC
-      - 8546:8546       # websocket
+      - 8540:8545       # RPC
+      - 8541:8546       # websocket
       - 30303:30303     # P2P TCP (currently unused)
       - 30303:30303/udp # P2P UDP (currently unused)
       - 7301:6060       # metrics
@@ -13,7 +13,9 @@ services:
     env_file:
       # select your network here:
 #      - .env.goerli
-#      - .env.mainnet
+     - .env.mainnet
+    volumes:
+      - /home/local/dir/base:/data
   node:
     build: .
     depends_on:
@@ -28,4 +30,4 @@ services:
     env_file:
       # select your network here:
 #      - .env.goerli
-#      - .env.mainnet
+     - .env.mainnet
