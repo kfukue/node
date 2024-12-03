@@ -1,8 +1,8 @@
-version: '3.8'
-
 services:
-  geth: # this is Optimism's geth client
-    build: .
+  execution:
+    build:
+      context: .
+      dockerfile: ${CLIENT}/Dockerfile
     ports:
       - 8540:8545       # RPC
       - 8541:8546       # websocket
@@ -17,16 +17,18 @@ services:
     volumes:
       - /home/local/dir/base:/data
   node:
-    build: .
+    build:
+      context: .
+      dockerfile: ${CLIENT}/Dockerfile
     depends_on:
-      - geth
+      - execution
     ports:
-      - 7545:8545     # RPC
-      - 9222:9222     # P2P TCP
-      - 9222:9222/udp # P2P UDP
-      - 7300:7300     # metrics
-      - 6060:6060     # pprof
-    command: [ "sh", "./op-node-entrypoint" ]
+      - "7545:8545"     # RPC
+      - "9222:9222"     # P2P TCP
+      - "9222:9222/udp" # P2P UDP
+      - "7300:7300"     # metrics
+      - "6060:6060"     # pprof
+    command: [ "bash", "./op-node-entrypoint" ]
     env_file:
       # select your network here:
 #      - .env.goerli
