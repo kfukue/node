@@ -22,16 +22,16 @@ platform.
 The HackerOne platform allows us to have a centralized and single reporting
 source for us to deliver optimized SLA's and results. All reports submitted to
 the platform are triaged around the clock by our team of Coinbase engineers
-with domain knowledge, assuring the best quality of review.
+with domain knowledge, ensuring the best quality of review.
 
 For more information on reporting vulnerabilities and our HackerOne bug bounty
 program, view our [security program policies][7].
 
 [1]: https://www.coinbase.com/blog/celebrating-10-years-of-our-bug-bounty-program
 [2]: https://hackerone.com/coinbase?type=team 
-[3]: https://stack.optimism.io/
+[3]: https://docs.optimism.io/
 [4]: https://immunefi.com/bounty/optimism/
-[5]: https://stack.optimism.io/docs/releases/bedrock/
+[5]: https://docs.optimism.io/docs/releases/bedrock/
 [6]: https://hackerone.com/coinbase
 [7]: https://hackerone.com/coinbase?view_policy=true
 

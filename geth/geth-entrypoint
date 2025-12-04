@@ -9,20 +9,17 @@ AUTHRPC_PORT="${AUTHRPC_PORT:-8551}"
 METRICS_PORT="${METRICS_PORT:-6060}"
 HOST_IP="" # put your external IP address here and open port 30303 to improve peer connectivity
 P2P_PORT="${P2P_PORT:-30303}"
+DISCOVERY_PORT="${DISCOVERY_PORT:-30303}"
 ADDITIONAL_ARGS=""
 OP_GETH_GCMODE="${OP_GETH_GCMODE:-full}"
 OP_GETH_SYNCMODE="${OP_GETH_SYNCMODE:-full}"
 
-# Add cache and txpool optimizations with defaults
+# Add cache optimizations with defaults
 GETH_CACHE="${GETH_CACHE:-20480}"
 GETH_CACHE_DATABASE="${GETH_CACHE_DATABASE:-20}"
 GETH_CACHE_GC="${GETH_CACHE_GC:-12}"
 GETH_CACHE_SNAPSHOT="${GETH_CACHE_SNAPSHOT:-24}"
 GETH_CACHE_TRIE="${GETH_CACHE_TRIE:-44}"
-GETH_TXPOOL_GLOBALQUEUE="${GETH_TXPOOL_GLOBALQUEUE:-6144}"
-GETH_TXPOOL_GLOBALSLOTS="${GETH_TXPOOL_GLOBALSLOTS:-30072}"
-GETH_TXPOOL_LIFETIME="${GETH_TXPOOL_LIFETIME:-10m}"
-TXPOOL_PRICE_LIMIT="${TXPOOL_PRICE_LIMIT:-50}"
 
 if [[ -z "$OP_NODE_NETWORK" ]]; then
     echo "expected OP_NODE_NETWORK to be set" 1>&2
@@ -80,6 +77,7 @@ exec ./geth \
     --rollup.sequencerhttp="$OP_GETH_SEQUENCER_HTTP" \
     --rollup.halt=major \
     --op-network="$OP_NODE_NETWORK" \
+    --discovery.port="$DISCOVERY_PORT" \
     --port="$P2P_PORT" \
     --rollup.disabletxpoolgossip=true \
     --cache="$GETH_CACHE" \

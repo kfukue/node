@@ -2,12 +2,13 @@
 
 # Base Node
 
-Base is a secure, low-cost, developer-friendly Ethereum L2 built on Optimism's [OP Stack](https://stack.optimism.io/). This repository contains Docker builds to run your own node on the Base network.
+Base is a secure, low-cost, developer-friendly Ethereum L2 built on Optimism's [OP Stack](https://docs.optimism.io/). This repository contains Docker builds to run your own node on the Base network.
 
 [![Website base.org](https://img.shields.io/website-up-down-green-red/https/base.org.svg)](https://base.org)
 [![Docs](https://img.shields.io/badge/docs-up-green)](https://docs.base.org/)
 [![Discord](https://img.shields.io/discord/1067165013397213286?label=discord)](https://base.org/discord)
 [![Twitter Base](https://img.shields.io/twitter/follow/Base?style=social)](https://x.com/Base)
+[![Farcaster Base](https://img.shields.io/badge/Farcaster_Base-3d8fcc)](https://farcaster.xyz/base)
 
 ## Quick Start
 
@@ -39,8 +40,8 @@ Base is a secure, low-cost, developer-friendly Ethereum L2 built on Optimism's [
 
 ### Supported Clients
 
-- `geth` (default)
-- `reth`
+- `reth` (default)
+- `geth`
 - `nethermind`
 
 ## Requirements
@@ -50,32 +51,32 @@ Base is a secure, low-cost, developer-friendly Ethereum L2 built on Optimism's [
 - Modern Multicore CPU
 - 32GB RAM (64GB Recommended)
 - NVMe SSD drive
-- Storage: (2 \* [current chain size](https://base.org/stats) + [snapshot size](https://basechaindata.vercel.app) + 20% buffer (to accomodate future growth)
+- Storage: (2 \* [current chain size](https://base.org/stats) + [snapshot size](https://basechaindata.vercel.app) + 20% buffer) (to accommodate future growth)
 - Docker and Docker Compose
 
 ### Production Hardware Specifications
 
 The following are the hardware specifications we use in production:
 
+#### Reth Archive Node (recommended)
+
+- **Instance**: AWS i7i.12xlarge
+- **Storage**: RAID 0 of all local NVMe drives (`/dev/nvme*`)
+- **Filesystem**: ext4
+
 #### Geth Full Node
 
-- **Instance**: AWS i4i.12xlarge
+- **Instance**: AWS i7i.12xlarge
 - **Storage**: RAID 0 of all local NVMe drives (`/dev/nvme*`)
 - **Filesystem**: ext4
 
-#### Reth Archive Node
-
-- **Instance**: AWS i7ie.6xlarge
-- **Storage**: RAID 0 of all local NVMe drives (`/dev/nvme*`)
-- **Filesystem**: ext4
-
-[!NOTE]
+> [!NOTE]
 To run the node using a supported client, you can use the following command:
 `CLIENT=supported_client docker compose up --build`
  
 Supported clients:
+ - reth (runs vanilla node by default, Flashblocks mode enabled by providing RETH_FB_WEBSOCKET_URL, see [Reth Node README](./reth/README.md))
  - geth
- - reth (with Flashblocks support option, see [Reth Node README](./reth/README.md))
  - nethermind
 
 ## Configuration

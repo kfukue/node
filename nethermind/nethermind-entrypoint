@@ -4,20 +4,18 @@ set -eu
 # Default configurations
 NETHERMIND_DATA_DIR=${NETHERMIND_DATA_DIR:-/data}
 NETHERMIND_LOG_LEVEL=${NETHERMIND_LOG_LEVEL:-Info}
-NETWORK=${NETWORK:-mainnet}
 
 RPC_PORT="${RPC_PORT:-8545}"
 WS_PORT="${WS_PORT:-8546}"
 AUTHRPC_PORT="${AUTHRPC_PORT:-8551}"
 METRICS_PORT="${METRICS_PORT:-6060}"
 DISCOVERY_PORT="${DISCOVERY_PORT:-30303}"
-
-JWT_SECRET_FILE=${JWT_SECRET_FILE:-/tmp/jwt/jwtsecret}
+P2P_PORT="${P2P_PORT:-30303}"
 ADDITIONAL_ARGS=""
 
 # Check if required variables are set
-if [[ -z "$NETWORK" ]]; then
-    echo "Expected NETWORK to be set" 1>&2
+if [[ -z "$OP_NODE_NETWORK" ]]; then
+    echo "Expected OP_NODE_NETWORK to be set" 1>&2
     exit 1
 fi
 
@@ -32,7 +30,7 @@ fi
 echo "$OP_NODE_L2_ENGINE_AUTH_RAW" > "$OP_NODE_L2_ENGINE_AUTH"
 
 # Additional arguments based on environment variables
-if [ "${OP_NETHERMIND_BOOTNODES+x}" = x ]; then
+if [[ -n "${OP_NETHERMIND_BOOTNODES:-}" ]]; then
     ADDITIONAL_ARGS="$ADDITIONAL_ARGS --Network.Bootnodes=$OP_NETHERMIND_BOOTNODES"
 fi
 
@@ -60,4 +58,6 @@ exec ./nethermind \
     --HealthChecks.Enabled=true \
     --Metrics.Enabled=true \
     --Metrics.ExposePort="$METRICS_PORT" \
+    --Network.P2PPort="$P2P_PORT" \
+    --Network.DiscoveryPort="$DISCOVERY_PORT" \
     $ADDITIONAL_ARGS
